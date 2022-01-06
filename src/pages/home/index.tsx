@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../../components/header'
 import "./style.css"
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Select from '../../components/select';
 import ToDoList from '../../components/toDoList';
 import FormModal from '../../components/modal';
+import taskRequest from '../../requests/taskRequest';
+import genreRequest from '../../requests/genreRequest';
+import { useDataReducer } from "../../hooks/useDataReducer"
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [data, dispatch] = useDataReducer();
+
   const handleOpen = () => {
     setIsOpen(true);
   };
@@ -15,6 +20,21 @@ const Home = () => {
   const handleClose = () => {
     setIsOpen(false)
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const genres = await genreRequest('fetchGenres')
+      const tasks = await taskRequest('fetchTasks')
+      dispatch({ type: "genresUpdate", payload: {genre: genres}})
+      dispatch({ type: "tasksUpdate", payload: {task: tasks}})
+      
+    }
+    fetchData()
+  },[])
+
+  useEffect(() => {
+    console.log(data)
+  },[data])
 
   return (
       <div className="main">
