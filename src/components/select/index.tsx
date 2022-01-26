@@ -1,13 +1,27 @@
 import React from 'react'
+import { GenreType } from '../../interfaces/GenreType'
 import "./style.css"
 
+interface Props {
+  genres?: GenreType[];
+}
 
-const Select = () => {
+const renderOption = (props: Props) => {
+  return (
+    props.genres &&
+    props.genres.map((genre: GenreType) => (
+      <option key={genre.id} value={genre.id}>
+        {genre.name}
+      </option>
+    ))
+  );
+};
+
+const Select = (props: Props) => {
   return (
     <select className="select">
-      <option value="Aries">牡羊座</option>
-      <option value="Taurus">牡牛座</option>
-      <option value="Gemini">双子座</option>
+      {!props.genres && <option value={0}></option>}
+      {renderOption(props)}
     </select>
   )
 }

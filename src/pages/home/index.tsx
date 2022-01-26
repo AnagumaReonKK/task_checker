@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import Header from '../../components/header'
-import "./style.css"
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import Select from '../../components/select';
 import ToDoList from '../../components/toDoList';
 import FormModal from '../../components/modal';
 import taskRequest from '../../requests/taskRequest';
 import genreRequest from '../../requests/genreRequest';
 import { useDataReducer } from "../../hooks/useDataReducer"
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import "./style.css"
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +40,7 @@ const Home = () => {
       <div className="main">
           <Header />
           <div className="genre">
-            <Select />
+            <Select genres={data.genresData} />
             <AddCircleOutlineIcon 
               className="add_circle_outline_icon" 
               fontSize="small"
