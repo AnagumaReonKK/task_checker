@@ -4,8 +4,13 @@ import MenuIcon from '@mui/icons-material/Menu'
 import "./style.css"
 import Task from '../task'
 import FormModal from '../modal'
+import { TaskType } from "../../interfaces/TaskType" 
 
-const ToDoList = () => {
+interface Props {
+  tasks: TaskType[]
+}
+
+const ToDoList = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleOpen = () => {
     setIsOpen(true);
@@ -31,10 +36,9 @@ const ToDoList = () => {
         body="taskBody"
       />
       <div className="task_field">
-        <Task />
-        <Task />
-        <Task />
-        <Task />
+        {props.tasks.map((task: TaskType) => {
+          return <Task task={task} key={task.id} />
+        })}
       </div>
     </div>
   )

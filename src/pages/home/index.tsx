@@ -53,7 +53,7 @@ const Home = () => {
             />
           </div>
           <div className="contents">
-            <ToDoList />
+            <ToDoList tasks={data.tasksData}/>
           </div>
       </div>
   )
